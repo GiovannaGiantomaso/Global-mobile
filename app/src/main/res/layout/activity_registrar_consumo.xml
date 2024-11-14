@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFB4D3B5"
+    android:padding="16dp"
+    tools:context=".Registrar_consumo">
+
+    <!-- Título da Página -->
+
+    <!-- Campo Data de Registro -->
+
+    <!-- Campo Consumo em kWh -->
+    <ImageButton
+        android:id="@+id/botao_voltar"
+        android:layout_width="61dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Botão voltar"
+        app:layout_constraintBottom_toTopOf="@+id/tituloRegistro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.036"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_back_24" />
+
+    <TextView
+        android:id="@+id/tituloRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="196dp"
+        android:text="Registrar Consumo"
+        android:textColor="#134A16"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/dataRegistro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Data de Registro"
+        android:inputType="date"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloRegistro" />
+
+    <EditText
+        android:id="@+id/consumoKwh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Consumo (kWh)"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/dataRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botão Salvar Consumo -->
+    <Button
+        android:id="@+id/botaoSalvarConsumo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/qq"
+        android:text="Salvar Consumo"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/consumoKwh" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
