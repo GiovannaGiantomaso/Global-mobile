@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Encontre o botão e defina o clique para abrir a Activity Cadastrar
         val buttonComecar = findViewById<Button>(R.id.button_comecar)
         buttonComecar.setOnClickListener {
             val intent = Intent(this, Cadastrar::class.java)

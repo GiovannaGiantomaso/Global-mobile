@@ -22,7 +22,6 @@ class Cadastrar : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_cadastrar)
 
-        // Configuração para ajustar as margens de acordo com as barras do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,13 +35,21 @@ class Cadastrar : AppCompatActivity() {
         // Configura o botão de cadastro
         val botaoCadastrar = findViewById<Button>(R.id.botaoCadastrar)
         botaoCadastrar.setOnClickListener {
-            val nome = findViewById<EditText>(R.id.nome).text.toString()
-            val email = findViewById<EditText>(R.id.email).text.toString()
-            val senha = findViewById<EditText>(R.id.senha).text.toString()
+            val nome = findViewById<EditText>(R.id.nome).text.toString().trim()
+            val email = findViewById<EditText>(R.id.email).text.toString().trim()
+            val senha = findViewById<EditText>(R.id.senha).text.toString().trim()
 
-            // Verifica se todos os campos foram preenchidos
+            // Verifica se todos os campos foram preenchidos, se o e-mail é válido e se a senha tem no mínimo 6 caracteres
             if (nome.isNotEmpty() && email.isNotEmpty() && senha.isNotEmpty()) {
-                cadastrarUsuario(nome, email, senha)
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    if (senha.length >= 6) {
+                        cadastrarUsuario(nome, email, senha)
+                    } else {
+                        Toast.makeText(this, "A senha deve ter pelo menos 6 caracteres.", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Por favor, insira um e-mail válido.", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
             }
@@ -79,12 +86,13 @@ class Cadastrar : AppCompatActivity() {
                                 finish()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Erro ao salvar dados do usuário.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Erro ao salvar dados do usuário: ${e.message}", Toast.LENGTH_SHORT).show()
                             }
                     }
                 } else {
                     // Exibe a mensagem de erro caso o cadastro falhe
-                    Toast.makeText(this, "Erro ao cadastrar usuário: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    val errorMessage = task.exception?.localizedMessage ?: "Erro desconhecido"
+                    Toast.makeText(this, "Erro ao cadastrar usuário: $errorMessage", Toast.LENGTH_SHORT).show()
                 }
             }
     }
