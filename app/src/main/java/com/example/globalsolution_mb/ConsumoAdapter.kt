@@ -1,16 +1,20 @@
+package com.example.globalsolution_mb
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.globalsolution_mb.Consumo
-import com.example.globalsolution_mb.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ConsumoAdapter(
     private val consumos: List<Consumo>,
     private val onEditClick: (Consumo) -> Unit
 ) : RecyclerView.Adapter<ConsumoAdapter.ConsumoViewHolder>() {
+
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     inner class ConsumoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val dataRegistro: TextView = view.findViewById(R.id.textDataRegistro)
@@ -25,12 +29,10 @@ class ConsumoAdapter(
 
     override fun onBindViewHolder(holder: ConsumoViewHolder, position: Int) {
         val consumo = consumos[position]
-        holder.dataRegistro.text = consumo.dataRegistro
+        holder.dataRegistro.text = dateFormat.format(consumo.dataRegistro)
         holder.consumoKwh.text = "${consumo.consumoKwh} kWh"
         holder.buttonEdit.setOnClickListener { onEditClick(consumo) }
     }
 
     override fun getItemCount() = consumos.size
 }
-
-

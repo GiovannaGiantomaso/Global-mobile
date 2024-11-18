@@ -1,6 +1,5 @@
 package com.example.globalsolution_mb
 
-import ConsumoAdapter
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.Timestamp
+import java.util.*
 
 class Ver_consumo : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var consumoAdapter: ConsumoAdapter
-    private val consumos = mutableListOf<Consumo>() // Lista de consumos
+    private val consumos = mutableListOf<Consumo>()
     private lateinit var db: FirebaseFirestore
     private val userId = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -35,10 +36,8 @@ class Ver_consumo : AppCompatActivity() {
             insets
         }
 
-        // Inicializa o Firebase Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Configura o RecyclerView e o Adapter
         recyclerView = findViewById(R.id.recyclerViewConsumo)
         consumoAdapter = ConsumoAdapter(consumos) { consumo ->
             editarConsumo(consumo)
@@ -59,7 +58,7 @@ class Ver_consumo : AppCompatActivity() {
             }
         })
 
-        carregarConsumos() // Carrega os consumos iniciais
+        carregarConsumos()
     }
 
     private fun carregarConsumos(paginar: Boolean = false) {
@@ -73,7 +72,7 @@ class Ver_consumo : AppCompatActivity() {
 
         val query = db.collection("usuarios").document(userId).collection("consumo")
             .orderBy("data_registro")
-            .limit(20) // Cada página com 20 registros
+            .limit(15)
 
         val finalQuery = if (paginar && lastDocumentSnapshot != null) {
             query.startAfter(lastDocumentSnapshot)
@@ -88,11 +87,11 @@ class Ver_consumo : AppCompatActivity() {
                         .show()
                 } else {
                     lastDocumentSnapshot =
-                        documents.documents.last() // Atualiza o último documento carregado
+                        documents.documents.last()
                     for (document in documents) {
-                        val dataRegistro = document.getString("data_registro") ?: ""
+                        val dataRegistro = document.getTimestamp("data_registro")?.toDate() ?: Date()
                         val consumoKwh = document.getDouble("consumo_kwh") ?: 0.0
-                        consumos.add(Consumo(dataRegistro, consumoKwh))
+                        consumos.add(Consumo(dataRegistro, consumoKwh, document.id))
                     }
                     consumoAdapter.notifyDataSetChanged()
                 }
@@ -115,7 +114,7 @@ class Ver_consumo : AppCompatActivity() {
                 "consumo_kwh", novoConsumo.consumoKwh
             ).addOnSuccessListener {
                 Toast.makeText(this, "Consumo atualizado com sucesso!", Toast.LENGTH_SHORT).show()
-                carregarConsumos() // Recarrega a lista após a atualização
+                carregarConsumos()
             }.addOnFailureListener { e ->
                 Toast.makeText(this, "Erro ao atualizar consumo: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
