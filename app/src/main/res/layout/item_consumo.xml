@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textDataRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data de Registro"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textConsumoKwh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consumo (kWh)"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar" />
+</LinearLayout>

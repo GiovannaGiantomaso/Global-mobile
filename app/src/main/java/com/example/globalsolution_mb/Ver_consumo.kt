@@ -1,0 +1,127 @@
+package com.example.globalsolution_mb
+
+import ConsumoAdapter
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+
+class Ver_consumo : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var consumoAdapter: ConsumoAdapter
+    private val consumos = mutableListOf<Consumo>() // Lista de consumos
+    private lateinit var db: FirebaseFirestore
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+    private var lastDocumentSnapshot: DocumentSnapshot? = null
+    private var isLoading = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_ver_consumo)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        // Inicializa o Firebase Firestore
+        db = FirebaseFirestore.getInstance()
+
+        // Configura o RecyclerView e o Adapter
+        recyclerView = findViewById(R.id.recyclerViewConsumo)
+        consumoAdapter = ConsumoAdapter(consumos) { consumo ->
+            editarConsumo(consumo)
+        }
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = consumoAdapter
+
+        // Listener para scroll e carregamento incremental
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if (!isLoading && layoutManager.findLastVisibleItemPosition() == consumos.size - 1) {
+                    carregarConsumos(paginar = true)
+                }
+            }
+        })
+
+        carregarConsumos() // Carrega os consumos iniciais
+    }
+
+    private fun carregarConsumos(paginar: Boolean = false) {
+        if (userId == null) {
+            Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (isLoading) return
+        isLoading = true
+
+        val query = db.collection("usuarios").document(userId).collection("consumo")
+            .orderBy("data_registro")
+            .limit(20) // Cada página com 20 registros
+
+        val finalQuery = if (paginar && lastDocumentSnapshot != null) {
+            query.startAfter(lastDocumentSnapshot)
+        } else {
+            query
+        }
+
+        finalQuery.get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    Toast.makeText(this, "Nenhum consumo adicional encontrado.", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    lastDocumentSnapshot =
+                        documents.documents.last() // Atualiza o último documento carregado
+                    for (document in documents) {
+                        val dataRegistro = document.getString("data_registro") ?: ""
+                        val consumoKwh = document.getDouble("consumo_kwh") ?: 0.0
+                        consumos.add(Consumo(dataRegistro, consumoKwh))
+                    }
+                    consumoAdapter.notifyDataSetChanged()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Erro ao carregar consumos: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .addOnCompleteListener {
+                isLoading = false
+            }
+    }
+
+    private fun editarConsumo(consumo: Consumo) {
+        val dialog = EditConsumoDialog(this, consumo) { novoConsumo ->
+            val docRef = db.collection("usuarios").document(userId!!).collection("consumo")
+                .document(consumo.id)
+            docRef.update(
+                "data_registro", novoConsumo.dataRegistro,
+                "consumo_kwh", novoConsumo.consumoKwh
+            ).addOnSuccessListener {
+                Toast.makeText(this, "Consumo atualizado com sucesso!", Toast.LENGTH_SHORT).show()
+                carregarConsumos() // Recarrega a lista após a atualização
+            }.addOnFailureListener { e ->
+                Toast.makeText(this, "Erro ao atualizar consumo: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        dialog.show()
+    }
+}
+

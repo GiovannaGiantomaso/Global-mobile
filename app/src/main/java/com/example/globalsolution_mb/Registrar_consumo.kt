@@ -11,7 +11,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.Timestamp
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Registrar_consumo : AppCompatActivity() {
 
@@ -35,35 +38,43 @@ class Registrar_consumo : AppCompatActivity() {
         val dataRegistroEditText = findViewById<EditText>(R.id.dataRegistro)
         val consumoKwhEditText = findViewById<EditText>(R.id.consumoKwh)
 
-        //botão para salvar o consumo
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        dateFormat.isLenient = false
+
         botaoSalvarConsumo.setOnClickListener {
-            val dataRegistro = dataRegistroEditText.text.toString()
+            val dataRegistroString = dataRegistroEditText.text.toString()
             val consumoKwh = consumoKwhEditText.text.toString().toDoubleOrNull()
 
-            if (dataRegistro.isNotEmpty() && consumoKwh != null) {
-                // Verifica se o usuário está logado
-                if (userId != null) {
-                    val consumoData = hashMapOf(
-                        "data_registro" to dataRegistro,
-                        "consumo_kwh" to consumoKwh
-                    )
+            try {
+                val parsedDate = dateFormat.parse(dataRegistroString)
 
-                    // Salva o consumo na subcoleção "consumo" do usuário
-                    db.collection("usuarios").document(userId)
-                        .collection("consumo")
-                        .add(consumoData)
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Consumo registrado com sucesso!", Toast.LENGTH_SHORT).show()
-                            limparCampos(dataRegistroEditText, consumoKwhEditText)  // Limpa os campos após salvar
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Erro ao salvar consumo: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                if (parsedDate != null && consumoKwh != null) {
+                    val dataRegistro = Timestamp(parsedDate)
+
+                    if (userId != null) {
+                        val consumoData = hashMapOf(
+                            "data_registro" to dataRegistro,
+                            "consumo_kwh" to consumoKwh
+                        )
+
+                        db.collection("usuarios").document(userId)
+                            .collection("consumo")
+                            .add(consumoData)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Consumo registrado com sucesso!", Toast.LENGTH_SHORT).show()
+                                limparCampos(dataRegistroEditText, consumoKwhEditText) // Limpa os campos após salvar
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Erro ao salvar consumo: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Por favor, preencha todos os campos corretamente.", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Por favor, preencha todos os campos corretamente.", Toast.LENGTH_SHORT).show()
+            } catch (e: ParseException) {
+                Toast.makeText(this, "Formato de data inválido. Use: dd/MM/yyyy", Toast.LENGTH_SHORT).show()
             }
         }
 
