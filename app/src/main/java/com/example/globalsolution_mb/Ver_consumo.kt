@@ -109,12 +109,18 @@ class Ver_consumo : AppCompatActivity() {
         val dialog = EditConsumoDialog(this, consumo) { novoConsumo ->
             val docRef = db.collection("usuarios").document(userId!!).collection("consumo")
                 .document(consumo.id)
+
             docRef.update(
                 "data_registro", novoConsumo.dataRegistro,
                 "consumo_kwh", novoConsumo.consumoKwh
             ).addOnSuccessListener {
                 Toast.makeText(this, "Consumo atualizado com sucesso!", Toast.LENGTH_SHORT).show()
-                carregarConsumos()
+
+                val index = consumos.indexOfFirst { it.id == consumo.id }
+                if (index != -1) {
+                    consumos[index] = novoConsumo
+                    consumoAdapter.notifyItemChanged(index)
+                }
             }.addOnFailureListener { e ->
                 Toast.makeText(this, "Erro ao atualizar consumo: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
@@ -122,5 +128,6 @@ class Ver_consumo : AppCompatActivity() {
         }
         dialog.show()
     }
+
 }
 
