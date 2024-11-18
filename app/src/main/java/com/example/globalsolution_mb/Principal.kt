@@ -26,5 +26,10 @@ class Principal : AppCompatActivity() {
             val intent = Intent(this, Registrar_consumo::class.java)
             startActivity(intent)
         }
+        val botaoVerHistorico= findViewById<Button>(R.id.botaoVerHistorico)
+        botaoVerHistorico.setOnClickListener {
+            val intent = Intent(this, Ver_consumo::class.java)
+            startActivity(intent)
+        }
     }
 }
