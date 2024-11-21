@@ -1,6 +1,7 @@
 package com.example.globalsolution_mb
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.Timestamp
 import java.util.*
 
 class Ver_consumo : AppCompatActivity() {
@@ -36,17 +36,23 @@ class Ver_consumo : AppCompatActivity() {
             insets
         }
 
+        val botaoVoltar = findViewById<ImageButton>(R.id.botao_voltar)
+        botaoVoltar.setOnClickListener {
+            finish()
+        }
+
         db = FirebaseFirestore.getInstance()
 
         recyclerView = findViewById(R.id.recyclerViewConsumo)
-        consumoAdapter = ConsumoAdapter(consumos) { consumo ->
+        consumoAdapter = ConsumoAdapter(consumos, { consumo ->
             editarConsumo(consumo)
-        }
+        }, { consumo ->
+            deletarConsumo(consumo)
+        })
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = consumoAdapter
 
-        // Listener para scroll e carregamento incremental
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -86,8 +92,7 @@ class Ver_consumo : AppCompatActivity() {
                     Toast.makeText(this, "Nenhum consumo adicional encontrado.", Toast.LENGTH_SHORT)
                         .show()
                 } else {
-                    lastDocumentSnapshot =
-                        documents.documents.last()
+                    lastDocumentSnapshot = documents.documents.last()
                     for (document in documents) {
                         val dataRegistro = document.getTimestamp("data_registro")?.toDate() ?: Date()
                         val consumoKwh = document.getDouble("consumo_kwh") ?: 0.0
@@ -129,5 +134,19 @@ class Ver_consumo : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun deletarConsumo(consumo: Consumo) {
+        val docRef = db.collection("usuarios").document(userId!!).collection("consumo")
+            .document(consumo.id)
+
+        docRef.delete()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Consumo deletado com sucesso!", Toast.LENGTH_SHORT).show()
+                consumos.remove(consumo)
+                consumoAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Erro ao deletar consumo: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
 }
 

@@ -23,11 +23,13 @@
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/qq"
         android:text="Salvar" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/qq"
         android:text="Cancelar" />
 </LinearLayout>

@@ -11,7 +11,8 @@ import java.util.*
 
 class ConsumoAdapter(
     private val consumos: List<Consumo>,
-    private val onEditClick: (Consumo) -> Unit
+    private val onEditClick: (Consumo) -> Unit,
+    private val onDeleteClick: (Consumo) -> Unit
 ) : RecyclerView.Adapter<ConsumoAdapter.ConsumoViewHolder>() {
 
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -20,6 +21,7 @@ class ConsumoAdapter(
         val dataRegistro: TextView = view.findViewById(R.id.textDataRegistro)
         val consumoKwh: TextView = view.findViewById(R.id.textConsumoKwh)
         val buttonEdit: Button = view.findViewById(R.id.buttonEdit)
+        val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConsumoViewHolder {
@@ -32,7 +34,9 @@ class ConsumoAdapter(
         holder.dataRegistro.text = dateFormat.format(consumo.dataRegistro)
         holder.consumoKwh.text = "${consumo.consumoKwh} kWh"
         holder.buttonEdit.setOnClickListener { onEditClick(consumo) }
+        holder.buttonDelete.setOnClickListener { onDeleteClick(consumo) }
     }
 
     override fun getItemCount() = consumos.size
 }
+
