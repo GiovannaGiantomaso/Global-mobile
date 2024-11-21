@@ -45,10 +45,9 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation(libs.recyclerview)
+    implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-
-// Apply Google Services plugin for Firebase
-apply(plugin = "com.google.gms.google-services")

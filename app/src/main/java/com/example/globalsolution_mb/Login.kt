@@ -29,13 +29,13 @@ class Login : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Configura o botão voltar para finalizar a Activity
+        // botão voltar para finalizar a Activity
         val botaoVoltar = findViewById<ImageButton>(R.id.botao_voltar)
         botaoVoltar.setOnClickListener {
-            finish() // Finaliza a Activity atual, retornando à anterior
+            finish()
         }
 
-        // Configura o botão Entrar para autenticar o usuário
+        // botão Entrar para autenticar o usuário
         val botaoEntrar = findViewById<Button>(R.id.botaoLogin)
         botaoEntrar.setOnClickListener {
             val email = findViewById<EditText>(R.id.email).text.toString()

@@ -78,10 +78,10 @@ class Registrar_consumo : AppCompatActivity() {
             }
         }
 
-        // Configura o botão voltar para finalizar a Activity
+        // botão voltar para finalizar a Activity
         val botaoVoltar = findViewById<ImageButton>(R.id.botao_voltar)
         botaoVoltar.setOnClickListener {
-            finish() // Finaliza a Activity atual, retornando à anterior
+            finish()
         }
     }
 

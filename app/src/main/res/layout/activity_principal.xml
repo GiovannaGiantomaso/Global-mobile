@@ -9,13 +9,6 @@
     android:padding="16dp"
     tools:context=".Principal">
 
-    <!-- Mensagem de Boas-vindas -->
-
-    <!-- Descrição sobre o App -->
-
-    <!-- Botão para Registrar Consumo -->
-
-    <!-- Botão para Ver Histórico -->
     <TextView
         android:id="@+id/boasVindas"
         android:layout_width="0dp"
@@ -36,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:gravity="center"
         android:text="Acompanhe seu consumo de energia e faça escolhas mais conscientes. Registre seu uso, visualize o consumo e contribua para um futuro sustentável."
@@ -52,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/qq"
         android:text="Registrar Consumo"
@@ -68,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/qq"
         android:text="Ver Consumo"
@@ -79,11 +72,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/botaoRegistrarConsumo" />
 
+    <Button
+        android:id="@+id/botaoExibirGrafico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/qq"
+        android:text="Exibir Gráfico"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botaoVerHistorico" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="150dp"
         android:layout_height="120dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -28,11 +28,11 @@ class Cadastrar : AppCompatActivity() {
             insets
         }
 
-        // Inicializa Firebase Authentication e Firestore
+        // Inicia Firebase Authentication e Firestore
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Configura o botão de cadastro
+        // botão de cadastro
         val botaoCadastrar = findViewById<Button>(R.id.botaoCadastrar)
         botaoCadastrar.setOnClickListener {
             val nome = findViewById<EditText>(R.id.nome).text.toString().trim()
@@ -55,7 +55,7 @@ class Cadastrar : AppCompatActivity() {
             }
         }
 
-        // Configura o botão para redirecionar ao login
+        // botão para redirecionar ao login
         val botaoLogin = findViewById<Button>(R.id.botaologin)
         botaoLogin.setOnClickListener {
             val intent = Intent(this, Login::class.java)
@@ -63,7 +63,7 @@ class Cadastrar : AppCompatActivity() {
         }
     }
 
-    // Função para cadastrar o usuário com Firebase Authentication e salvar o nome no Firestore
+    // Função que cadastra o usuário com Firebase Authentication e salvar o nome no Firestore
     private fun cadastrarUsuario(nome: String, email: String, senha: String) {
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener { task ->
@@ -81,7 +81,7 @@ class Cadastrar : AppCompatActivity() {
                             .set(usuario)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                                // Redireciona para a tela principal após o cadastro bem-sucedido
+                                // vai para a tela principal após o cadastro bem-sucedido
                                 startActivity(Intent(this, Principal::class.java))
                                 finish()
                             }
@@ -90,7 +90,7 @@ class Cadastrar : AppCompatActivity() {
                             }
                     }
                 } else {
-                    // Exibe a mensagem de erro caso o cadastro falhe
+                    // mostra a mensagem de erro caso o cadastro falhe
                     val errorMessage = task.exception?.localizedMessage ?: "Erro desconhecido"
                     Toast.makeText(this, "Erro ao cadastrar usuário: $errorMessage", Toast.LENGTH_SHORT).show()
                 }

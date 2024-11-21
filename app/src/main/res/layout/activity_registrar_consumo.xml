@@ -9,11 +9,6 @@
     android:padding="16dp"
     tools:context=".Registrar_consumo">
 
-    <!-- Título da Página -->
-
-    <!-- Campo Data de Registro -->
-
-    <!-- Campo Consumo em kWh -->
     <ImageButton
         android:id="@+id/botao_voltar"
         android:layout_width="61dp"
@@ -73,7 +68,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botão Salvar Consumo -->
     <Button
         android:id="@+id/botaoSalvarConsumo"
         android:layout_width="0dp"
