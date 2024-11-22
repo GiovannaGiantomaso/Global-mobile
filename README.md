@@ -36,51 +36,51 @@ Caso o consumo tenha diminuído, parabeniza o usuário e incentiva a continuidad
 Tecnologias Utilizadas
 
 
-Backend
+- Backend
 
-Firebase:
+- Firebase:
 
-Firebase Authentication: Gerenciamento de login e autenticação dos usuários.
+- Firebase Authentication: Gerenciamento de login e autenticação dos usuários.
 
-Firebase Firestore: Armazenamento e consulta de dados em tempo real.
+- Firebase Firestore: Armazenamento e consulta de dados em tempo real.
 
-Aplicativo Mobile
+- Aplicativo Mobile
 
-Desenvolvido com Android Studio utilizando Kotlin.
+- Desenvolvido com Android Studio utilizando Kotlin.
 
-Visualização Gráfica
+- Visualização Gráfica
 
-Biblioteca MPAndroidChart para a exibição de gráficos interativos e customizáveis.
+- Biblioteca MPAndroidChart para a exibição de gráficos interativos e customizáveis.
 
 
 Estrutura do Projeto
 
 
-Telas
+Telas:
 
 
-Tela Principal
+* Tela Principal
 
-Exibe uma mensagem de boas-vindas e descrição do sistema.
+- Exibe uma mensagem de boas-vindas e descrição do sistema.
 
-Botões para registrar consumo, visualizar histórico e acessar gráficos.
-
-
-Tela de Registro
-
-Permite ao usuário inserir o consumo mensal e salvar no sistema.
+- Botões para registrar consumo, visualizar histórico e acessar gráficos.
 
 
-Tela de Histórico
+* Tela de Registro
 
-Mostra o histórico detalhado do consumo mensal.
+- Permite ao usuário inserir o consumo mensal e salvar no sistema.
 
 
-Tela de Gráficos
+* Tela de Histórico
 
-Apresenta a evolução do consumo por meio de gráficos lineares.
+- Mostra o histórico detalhado do consumo mensal.
 
-Inclui feedback textual sobre o consumo comparado ao mês anterior.
+
+* Tela de Gráfico
+
+- Apresenta a evolução do consumo por meio de gráficos lineares.
+
+-  Inclui feedback textual sobre o consumo comparado ao mês anterior.
 
 
 Configuração do Projeto
