@@ -8,7 +8,7 @@ O objetivo principal é promover a conscientização sobre o uso responsável da
 
 ### Funcionalidades Principais
 
-1. Registro Mensal de Consumo
+### 1. Registro Mensal de Consumo
    
 - Os usuários podem inserir manualmente o consumo mensal de energia.
 
@@ -17,14 +17,14 @@ O objetivo principal é promover a conscientização sobre o uso responsável da
 - O consumo é organizado por mês e ano, facilitando a consulta e gestão do histórico.
 
 
-2. Visualização do Histórico de Consumo
+### 2. Visualização do Histórico de Consumo
    
 - O aplicativo exibe gráficos interativos que mostram a evolução do consumo ao longo do tempo.
 
 - Os gráficos ajudam os usuários a identificar padrões, como aumento ou redução no consumo.
 
 
-3. Feedback sobre o Consumo
+### 3. Feedback sobre o Consumo
 Compara o consumo atual com o mês anterior.
 
 - Exibe mensagens de feedback motivacionais:
