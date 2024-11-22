@@ -74,7 +74,7 @@ Compara o consumo atual com o mês anterior.
 
 ### Tela de Histórico
 
-- Mostra o histórico detalhado do consumo mensal.
+- Mostra o histórico detalhado do consumo mensal com a opção de editar ou excluir.
 
 
 ### Tela de Gráfico
