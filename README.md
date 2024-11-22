@@ -112,7 +112,7 @@ Baixe o arquivo google-services.json e adicione à pasta app do projeto.
 
 Clone o repositório:
 
-git clone https://github.com/seu-usuario/projeto-monitoramento-energia.git
+git clone https://github.com/GiovannaGiantomaso/Global-mobile.git
 
 Abra o projeto no Android Studio.
 
