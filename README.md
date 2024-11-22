@@ -15,11 +15,13 @@ Os dados são armazenados no Firebase Firestore, garantindo persistência e inte
 
 O consumo é organizado por mês e ano, facilitando a consulta e gestão do histórico.
 
+
 2. Visualização do Histórico de Consumo
    
 O aplicativo exibe gráficos interativos que mostram a evolução do consumo ao longo do tempo.
 
 Os gráficos ajudam os usuários a identificar padrões, como aumento ou redução no consumo.
+
 
 3. Feedback sobre o Consumo
 Compara o consumo atual com o mês anterior.
@@ -30,7 +32,9 @@ Caso o consumo tenha aumentado, o aplicativo alerta para a necessidade de econom
 
 Caso o consumo tenha diminuído, parabeniza o usuário e incentiva a continuidade do hábito.
 
+
 Tecnologias Utilizadas
+
 
 Backend
 
