@@ -6,7 +6,8 @@ O Projeto de Monitoramento de Consumo de Energia é uma solução que permite ao
 O objetivo principal é promover a conscientização sobre o uso responsável da energia elétrica, incentivando hábitos sustentáveis por meio de uma interface amigável e intuitiva.
 --
 ### LINK DO VÍDEO DEMONSTRANDO O APP E SUAS UTILIDADES FUNCIONANDO: https://youtu.be/Smah8bxchUc
-
+### FIGMA TELAS:
+![image](https://github.com/user-attachments/assets/fe778635-c8ee-444a-b216-58261680d516)
 
 ### Funcionalidades Principais
 
