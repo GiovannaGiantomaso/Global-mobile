@@ -5,7 +5,7 @@
 O Projeto de Monitoramento de Consumo de Energia é uma solução que permite aos usuários registrar manualmente o consumo mensal de energia elétrica e acompanhar sua evolução ao longo do tempo. 
 O objetivo principal é promover a conscientização sobre o uso responsável da energia elétrica, incentivando hábitos sustentáveis por meio de uma interface amigável e intuitiva.
 --
-### LINK DO VÍDEO DEMONSTRANDO O APP E SUAS UTILIDADES FUNCIONANDO: https://youtu.be/Smah8bxchUc
+### LINK DO VÍDEO DEMONSTRANDO O APP E SUAS UTILIDADES FUNCIONANDO: https://youtu.be/5Stk8Q1CpK0
 ### LINK DO FIGMA: https://www.figma.com/proto/o9uPKPwLJlf2OWTOakHcf8/Ecogreen?node-id=76-2&node-type=canvas&t=PYvDvl7tIfInx4xR-1&scaling=min-zoom&content-scaling=fixed&page-id=23%3A2&starting-point-node-id=76%3A2
 
 ### Funcionalidades Principais
