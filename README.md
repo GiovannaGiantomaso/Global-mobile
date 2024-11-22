@@ -4,6 +4,10 @@
 
 O Projeto de Monitoramento de Consumo de Energia é uma solução que permite aos usuários registrar manualmente o consumo mensal de energia elétrica e acompanhar sua evolução ao longo do tempo. 
 O objetivo principal é promover a conscientização sobre o uso responsável da energia elétrica, incentivando hábitos sustentáveis por meio de uma interface amigável e intuitiva.
+
+--
+### LINK DO VÍDEO DEMONSTRANDO O APP E SUAS UTILIDADES FUNCIONANDO: https://youtu.be/Smah8bxchUc
+
 --
 
 ### Funcionalidades Principais
@@ -124,3 +128,8 @@ Execute o aplicativo no emulador ou dispositivo físico.
 O projeto busca conscientizar os usuários sobre a importância de economizar energia elétrica.
 
 Através de ferramentas intuitivas, como gráficos e feedback textual, os usuários podem acompanhar seus padrões de consumo e tomar decisões mais conscientes e sustentáveis.
+
+## INTEGRANTES:
+- RM 553369
+- RM 553764
+- RM 84059
